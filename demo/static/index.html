@@ -1,0 +1,45 @@
+<html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script>
+	var mp = angular.module("imgapp",[]);
+			console.log('app up');
+mp.controller("d",($scope,$http)=>{
+
+			console.log("cont up ");
+			//$scope.price="132";	
+	$http.get("http://localhost:9090/name").then((res)=>{
+		console.log("got it");
+		console.log(res.data);
+		$scope.name=res.data.name;
+		$scope.price=res.data.price;
+	},(err,res)=>{console.log(err);});
+});
+</script>
+<body ng-app="imgapp" ng-controller="d">
+<div class="container-fluid">
+<div class="row">
+<div class="col-xs-6">
+<img src="http://localhost:9090/img" >
+</div>
+<div class="col-xs-6">
+	    <div><h2>Name:{{name}}</h2></div>
+	     <div><h2>Price:${{price}}</h2></div>
+	     <div><button class="btn btn-success">Buy Now</button></div>
+</div>
+</div>
+</div>
+
+
+</body>
+
+</html>
